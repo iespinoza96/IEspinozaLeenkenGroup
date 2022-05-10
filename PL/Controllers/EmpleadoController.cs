@@ -20,5 +20,6 @@ namespace PL.Controllers
         {
             return View(new ML.Empleado());
         }
+
 	}
 }

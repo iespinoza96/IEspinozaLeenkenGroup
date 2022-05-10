@@ -26,7 +26,7 @@ function GetAll() {
 
                 //    + "</tr>";
 
-                
+
                 //$("#tblEmpleado tbody").append(filas);
 
                 CreteRow(empleado);
@@ -48,8 +48,8 @@ function CatEntidadFederativaGetAll() {
             $("#ddlEstados").append('<option value="' + 0 + '">' + 'Seleccione una opción' + '</option>');
             $.each(result.Objects, function (i, estado) {
                 $("#ddlEstados").append('<option value="'
-                                           + estado.IdEstado + '">'
-                                           + estado.Estado + '</option>');
+                    + estado.IdEstado + '">'
+                    + estado.Estado + '</option>');
             });
         },
         error: function (result) {
@@ -71,7 +71,7 @@ function Add(empleado) {
             $('#myModal').modal();
 
             CatEntidadFederativaGetAll();
-          
+
         },
         error: function (result) {
             alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
@@ -102,24 +102,78 @@ function GetById(IdEmpleado) {
 
 }
 
-function CreteRow(empleado) {
-                var filas =
-                    '<tr>'
-                    + '<td class="text-center"> '
-                    + '<a class="glyphicon glyphicon-edit" href="#" onclick="GetById(' + empleado.IdEmpleado + ')">'
-                    + '</a> '
-                    + '</td>'
-                    + "<td  id='tblIdEmpleado' class='text-center'>" + empleado.IdEmpleado + "</td>"
-                    + "<td id='tblNumeroNomina' class='text-center'>" + empleado.NumeroNomina + "</td>"
-                    + "<td id='tblNombre' class='text-center'>" + empleado.Nombre + " " + empleado.ApellidoPaterno + " " + empleado.ApellidoMaterno +"</td>"
-                    + "<td id='tblIdEmpleado'class='text-center'>" + empleado.Estado.IdEstado + "</td>"
+function test() {
 
-                        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+    $(".boton").click(function () {
 
-                    + "</tr>";
+        var valores = "";
 
-                $("#tblEmpleado tbody").append(filas);
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+
+        // seleccionada
+
+        $(this).parents("tr").find("td").each(function () {
+
+            valores += $(this).html() + "\n";
+
+        });
+
+        //alert(valores);
+        CatEntidadFederativaGetAll();
+
+        $('#ModalForm').modal('show',valores);
+        $('#lblTitulo').modal('Modificar Empleado');
+
+    });
+}
+
+function Mostrar() {
+
+
+    var IdEmpleado = $('#tblIdEmpleado');
+    var NumeroNomina = $('#tblNumeroNomina');
+    var Nombre = $('#tblNombre');
+    var ApellidoPaterno = $('#tblApellidoPaterno');
+    var ApellidoMaterno = $('#tblApellidoMaterno');
+    var IdEstado = $('#tblIdEstado');
+
+    $(this).parents("tr").find("td").each(function () {
+        $('#txtIdEmpleado').val(IdEmpleado);
+        $('#txtNumeroNomina').val(NumeroNomina);
+        $('#txtNombre').val(Nombre);
+        $('#txtApellidoPaterno').val(ApellidoPaterno);
+        $('#txtApellidoMaterno').val(ApellidoMaterno);
+        $('#ddlEstados').val(IdEstado);
+    });
+
+        //CreteRow(empleado);
    
+    CatEntidadFederativaGetAll();
+
+    $('#ModalForm').modal('show');
+    $('#lblTitulo').modal('Modificar Empleado');
+}
+
+function CreteRow(empleado) {
+    var filas =
+        '<tr>'
+        + '<td class="text-center boton" > '
+        + '<a class="glyphicon glyphicon-edit" href="#" onclick="Mostrar()">'
+        + '</a> '
+        + '</td>'
+        + "<td id='tblIdEmpleado' class='text-center'>" + empleado.IdEmpleado + "</td>"
+        + "<td id='tblNumeroNomina' class='text-center'>" + empleado.NumeroNomina + "</td>"
+        + "<td id='tblNombre' class='text-center'>" + empleado.Nombre + "</td>"
+        + "<td id='tblApellidoPaterno' class='text-center'>" + empleado.ApellidoPaterno + "</td>"
+        + "<td id='tblApellidoMaterno' class='text-center'>" + empleado.ApellidoMaterno + "</td>"
+        + "<td id='tblIdEstado'class='text-center'>" + empleado.Estado.IdEstado + "</td>"
+
+        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+
+        + "</tr>";
+
+    $("#tblEmpleado tbody").append(filas);
+
 }
 
 function InitializeControls() {
@@ -130,7 +184,6 @@ function InitializeControls() {
     $('#txtApellidoPaterno').val('');
     $('#txtApellidoMaterno').val('');
     $('#ddlEstados').val(0);
-
     $('#ModalForm').modal('show');
 
 }
@@ -147,6 +200,7 @@ function ShowModal() {
 }
 
 function Update(empleado) {
+
     $.ajax({
         type: 'PUT',
         url: 'http://localhost:10038/api/empleado/update/',
@@ -179,12 +233,10 @@ function Guardar() {
             IdEstado: $('#ddlEstados').val()
         }
     }
-    if ($('#txtIdEmpleado').val() == "")
-    {
+    if ($('#txtIdEmpleado').val() == "") {
         Add(empleado);
     }
-    else
-    {
+    else {
         Update(empleado);
     }
 
