@@ -10,26 +10,26 @@ function GetAll() {
         success: function (result) {//200 OK
             $('#tblEmpleado tbody').empty();
             $.each(result.Objects, function (i, empleado) {
-                //var filas =
-                //    '<tr>'
-                //    + '<td class="text-center"> '
-                //    + '<a class="glyphicon glyphicon-edit" href="#" onclick="CreateRow(' + empleado.IdEmpleado + ')">'
+                var filas =
+                    '<tr>'
+                    + '<td class="text-center"> '
+                    + '<a class="glyphicon glyphicon-edit" href="#" onclick="CreateRow(' + empleado.IdEmpleado + ')">'
 
-                //    + '</a> '
-                //    + '</td>'
-                //    + "<td  id='id' class='text-center'>" + empleado.IdEmpleado + "</td>"
-                //    + "<td class='text-center'>" + empleado.NumeroNomina + "</td>"
-                //    + "<td class='text-center'>" + empleado.Nombre + " " + empleado.ApellidoPaterno + " " + empleado.ApellidoMaterno +"</td>"
-                //    + "<td class='text-center'>" + empleado.Estado.IdEstado + "</td>"
+                    + '</a> '
+                    + '</td>'
+                    + "<td  id='id' class='text-center'>" + empleado.IdEmpleado + "</td>"
+                    + "<td class='text-center'>" + empleado.NumeroNomina + "</td>"
+                    + "<td class='text-center'>" + empleado.Nombre + " " + empleado.ApellidoPaterno + " " + empleado.ApellidoMaterno +"</td>"
+                    + "<td class='text-center'>" + empleado.Estado.IdEstado + "</td>"
 
-                //        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+                        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
 
-                //    + "</tr>";
+                    + "</tr>";
 
 
-                //$("#tblEmpleado tbody").append(filas);
+                $("#tblEmpleado tbody").append(filas);
 
-                CreteRow(empleado);
+                //CreteRow(empleado);
             });
         },
         error: function (result) {
@@ -102,79 +102,79 @@ function GetById(IdEmpleado) {
 
 }
 
-function test() {
+//function test() {
 
-    $(".boton").click(function () {
+//    $(".boton").click(function () {
 
-        var valores = "";
+//        var valores = "";
 
-        // Obtenemos todos los valores contenidos en los <td> de la fila
+//        // Obtenemos todos los valores contenidos en los <td> de la fila
 
-        // seleccionada
+//        // seleccionada
 
-        $(this).parents("tr").find("td").each(function () {
+//        $(this).parents("tr").find("td").each(function () {
 
-            valores += $(this).html() + "\n";
+//            valores += $(this).html() + "\n";
 
-        });
+//        });
 
-        //alert(valores);
-        CatEntidadFederativaGetAll();
+//        //alert(valores);
+//        CatEntidadFederativaGetAll();
 
-        $('#ModalForm').modal('show',valores);
-        $('#lblTitulo').modal('Modificar Empleado');
+//        $('#ModalForm').modal('show',valores);
+//        $('#lblTitulo').modal('Modificar Empleado');
 
-    });
-}
+//    });
+//}
 
-function Mostrar() {
+//function Mostrar() {
 
 
-    var IdEmpleado = $('#tblIdEmpleado');
-    var NumeroNomina = $('#tblNumeroNomina');
-    var Nombre = $('#tblNombre');
-    var ApellidoPaterno = $('#tblApellidoPaterno');
-    var ApellidoMaterno = $('#tblApellidoMaterno');
-    var IdEstado = $('#tblIdEstado');
+//    var IdEmpleado = $('#tblIdEmpleado');
+//    var NumeroNomina = $('#tblNumeroNomina');
+//    var Nombre = $('#tblNombre');
+//    var ApellidoPaterno = $('#tblApellidoPaterno');
+//    var ApellidoMaterno = $('#tblApellidoMaterno');
+//    var IdEstado = $('#tblIdEstado');
 
-    $(this).parents("tr").find("td").each(function () {
-        $('#txtIdEmpleado').val(IdEmpleado);
-        $('#txtNumeroNomina').val(NumeroNomina);
-        $('#txtNombre').val(Nombre);
-        $('#txtApellidoPaterno').val(ApellidoPaterno);
-        $('#txtApellidoMaterno').val(ApellidoMaterno);
-        $('#ddlEstados').val(IdEstado);
-    });
+//    $(this).parents("tr").find("td").each(function () {
+//        $('#txtIdEmpleado').val(IdEmpleado);
+//        $('#txtNumeroNomina').val(NumeroNomina);
+//        $('#txtNombre').val(Nombre);
+//        $('#txtApellidoPaterno').val(ApellidoPaterno);
+//        $('#txtApellidoMaterno').val(ApellidoMaterno);
+//        $('#ddlEstados').val(IdEstado);
+//    });
 
-        //CreteRow(empleado);
+//        //CreteRow(empleado);
    
-    CatEntidadFederativaGetAll();
+//    CatEntidadFederativaGetAll();
 
-    $('#ModalForm').modal('show');
-    $('#lblTitulo').modal('Modificar Empleado');
-}
+//    $('#ModalForm').modal('show');
+//    $('#lblTitulo').modal('Modificar Empleado');
+//}
 
-function CreteRow(empleado) {
-    var filas =
-        '<tr>'
-        + '<td class="text-center boton" > '
-        + '<a class="glyphicon glyphicon-edit" href="#" onclick="Mostrar()">'
-        + '</a> '
-        + '</td>'
-        + "<td id='tblIdEmpleado' class='text-center'>" + empleado.IdEmpleado + "</td>"
-        + "<td id='tblNumeroNomina' class='text-center'>" + empleado.NumeroNomina + "</td>"
-        + "<td id='tblNombre' class='text-center'>" + empleado.Nombre + "</td>"
-        + "<td id='tblApellidoPaterno' class='text-center'>" + empleado.ApellidoPaterno + "</td>"
-        + "<td id='tblApellidoMaterno' class='text-center'>" + empleado.ApellidoMaterno + "</td>"
-        + "<td id='tblIdEstado'class='text-center'>" + empleado.Estado.IdEstado + "</td>"
+//function CreteRow(empleado) {
+//    var filas =
+//        '<tr>'
+//        + '<td class="text-center boton" > '
+//        + '<a class="glyphicon glyphicon-edit" href="#" onclick="Mostrar()">'
+//        + '</a> '
+//        + '</td>'
+//        + "<td id='tblIdEmpleado' class='text-center'>" + empleado.IdEmpleado + "</td>"
+//        + "<td id='tblNumeroNomina' class='text-center'>" + empleado.NumeroNomina + "</td>"
+//        + "<td id='tblNombre' class='text-center'>" + empleado.Nombre + "</td>"
+//        + "<td id='tblApellidoPaterno' class='text-center'>" + empleado.ApellidoPaterno + "</td>"
+//        + "<td id='tblApellidoMaterno' class='text-center'>" + empleado.ApellidoMaterno + "</td>"
+//        + "<td id='tblIdEstado'class='text-center'>" + empleado.Estado.IdEstado + "</td>"
 
-        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+//        + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
 
-        + "</tr>";
+//        + "</tr>";
 
-    $("#tblEmpleado tbody").append(filas);
+//    $("#tblEmpleado tbody").append(filas);
 
-}
+//}
 
 function InitializeControls() {
 
